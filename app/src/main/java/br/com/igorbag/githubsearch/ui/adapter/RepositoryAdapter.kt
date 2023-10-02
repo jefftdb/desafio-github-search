@@ -1,16 +1,24 @@
 package br.com.igorbag.githubsearch.ui.adapter
 
+import android.content.Intent
+import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import br.com.igorbag.githubsearch.R
 import br.com.igorbag.githubsearch.domain.Repository
+import br.com.igorbag.githubsearch.ui.MainActivity
+
 
 class RepositoryAdapter(private val repositories: List<Repository>) :
     RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {
 
-    var carItemLister: (Repository) -> Unit = {}
+    var repositoryItemLister: (Repository) -> Unit = {}
     var btnShareLister: (Repository) -> Unit = {}
 
     // Cria uma nova view
@@ -35,11 +43,21 @@ class RepositoryAdapter(private val repositories: List<Repository>) :
         //holder.favorito.setOnClickListener {
         //    btnShareLister(repositores[position])
         //}
+
+        holder.nome.text = repositories[position].name
+        holder.nome.setOnClickListener{
+            repositoryItemLister(repositories[position])
+        }
+        holder.compartilhar.setOnClickListener{
+            btnShareLister(repositories[position])
+
+
+        }
     }
 
     // Pega a quantidade de repositorios da lista
     //@TODO 9 - realizar a contagem da lista
-    override fun getItemCount(): Int = 0
+    override fun getItemCount(): Int = repositories.size
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         //@TODO 10 - Implementar o ViewHolder para os repositorios
@@ -51,7 +69,23 @@ class RepositoryAdapter(private val repositories: List<Repository>) :
         //        atributo = findViewById(R.id.item_view)
         //    }
 
+        val nome : TextView
+        val compartilhar : ImageView
+
+        init {
+            view.apply {
+                nome = findViewById(R.id.tv_repository)
+                compartilhar = findViewById(R.id.iv_shared)
+            }
+        }
+
+
     }
+
+
+
+
 }
+
 
 
