@@ -3,4 +3,5 @@
     <string name="nome_usuario">Nome do usuário</string>
     <string name="confirmar">Confirmar</string>
     <string name="response_error">Algo deu errado, por favor tente novamente!</string>
+    <string name="usuario_nao_encontrado">Usuario não encontrado, verifique o nome e tente novamente!</string>
 </resources>

@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
 
                     }
                 else{
-                    Toast.makeText(this@MainActivity,R.string.response_error,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity,R.string.usuario_nao_encontrado,Toast.LENGTH_SHORT).show()
                 }
 
             }
@@ -146,7 +146,8 @@ class MainActivity : AppCompatActivity() {
          */
         val adapter = RepositoryAdapter(list)
         listaRepositories.adapter = adapter
-
+        adapter.repositoryItemLister = {adapter ->  openBrowser(adapter.htmlUrl) }
+        adapter.btnShareLister = {adapter -> shareRepositoryLink(adapter.htmlUrl)}
     }
 
 
@@ -167,6 +168,7 @@ class MainActivity : AppCompatActivity() {
 
     // @Todo 12 - Colocar esse metodo no click item do adapter
     fun openBrowser(urlRepository: String) {
+
         startActivity(
             Intent(
                 Intent.ACTION_VIEW,
